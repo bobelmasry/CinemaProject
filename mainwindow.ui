@@ -40,19 +40,6 @@
      <string>Password</string>
     </property>
    </widget>
-   <widget class="QLabel" name="errorLabel">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>140</y>
-      <width>221</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="userNameInput">
     <property name="geometry">
      <rect>
@@ -103,6 +90,19 @@
     </property>
     <property name="text">
      <string>Register</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="errorLabel">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>140</y>
+      <width>291</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
