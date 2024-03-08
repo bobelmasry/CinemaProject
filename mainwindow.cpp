@@ -23,10 +23,13 @@ void MainWindow::on_loginButton_clicked()
     QString passwordEntered = ui->passwordInput->text();
     bool usernameFound = false;
     bool passwordFound = false;
+    int foundIndex = -1;
 
     for (int i = 0; i < 4; i++){
-        if (usernames[i] == usernameEntered)
+        if (usernames[i] == usernameEntered){
             usernameFound = true;
+            foundIndex = i;
+            break;}
     }
     for (int i = 0; i < 4; i++){
         if (passwords[i] == passwordEntered)
@@ -43,7 +46,7 @@ void MainWindow::on_loginButton_clicked()
     }
     else {
         hide();
-        WelcomeWindow* welcomeWindow = new WelcomeWindow(this);
+        WelcomeWindow* welcomeWindow = new WelcomeWindow(this, usernameEntered, ages[foundIndex]);
         welcomeWindow->show();
     }
 }
