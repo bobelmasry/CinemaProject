@@ -1,6 +1,7 @@
 #include "registerwindow.h"
 #include "ui_registerwindow.h"
 #include "Users.h"
+#include "welcomewindow.h"
 
 RegisterWindow::RegisterWindow(QWidget *parent)
     : QDialog(parent)
@@ -20,6 +21,11 @@ RegisterWindow::~RegisterWindow()
 
 void RegisterWindow::on_registerButton_clicked()
 {
+    ui->userNameError->setVisible(false);
+    ui->registerError->setVisible(false);
+    ui->dateOfBirthError->setVisible(false);
+    ui->retypePasswordError->setVisible(false);
+
     QString username = ui->usernameInput->text();
     QString password = ui->passwordInput->text();
     QString retypedpPassword = ui->retypePassowrdInput->text();
@@ -46,20 +52,32 @@ void RegisterWindow::on_registerButton_clicked()
     for(int i = 0 ; i<4 ; i++){
         if (username==usernames[i]){
             ui->userNameError->setVisible(true);
+            return;
         }
     }
 
     if(password!=retypedpPassword){
         ui->retypePasswordError->setVisible(true);
+        return;
     }
 
     if((2024-yearInt)<12){
         ui->dateOfBirthError->setVisible(true);
+        return;
     }
 
     if(username.isEmpty() || password.isEmpty() || retypedpPassword.isEmpty() || ( !isMale && !isFemale) || ( !isRomance && !isAction && !isDrama && isComedy && !isHorror && isOther ) ||
         day.isEmpty() || year.isEmpty() || month.isNull()){
         ui->registerError->setVisible(true);
+        return;
     }
+
+    usernames[usersCount] = username;
+    passwords[usersCount] = password;
+    ages[usersCount] = yearInt;
+    usersCount++;
+    hide();
+    WelcomeWindow *welcomeWindow = new WelcomeWindow(this, username, yearInt);
+    welcomeWindow->show();
 }
 
